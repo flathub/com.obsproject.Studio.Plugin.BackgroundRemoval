@@ -54,8 +54,8 @@ modules:
         ${FLATPAK_ID}
     sources:
       - type: archive
-        url: https://github.com/royshil/obs-backgroundremoval/archive/refs/tags/v1.0.0.tar.gz
-        sha256: 51450d7efa60108f1214fa599e13dc90a12c8e74d65bd3727887456e964fa38e
+        url: https://github.com/royshil/obs-backgroundremoval/archive/refs/tags/v1.0.1.tar.gz
+        sha256: 92385cff5a58644496306e66b15189a333e980a8b22958959566a10fc494d72f
         x-checker-data:
             type: git
             tag-pattern: ^v([\d.]+)$
