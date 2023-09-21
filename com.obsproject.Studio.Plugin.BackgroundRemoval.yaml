@@ -33,13 +33,10 @@ modules:
     buildsystem: cmake-ninja
     config-opts:
       - --preset=linux-ci-x86_64
-      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
-      - -DCMAKE_POSITION_INDEPENDENT_CODE=ON
-      - -DENABLE_FRONTEND_API=ON
-      - -DENABLE_QT=ON
-      - -DCMAKE_COMPILE_WARNING_AS_ERROR=ON
       - -DCUSTOM_OPENCV_URL=./opencv-linux-Release.tar.gz
       - -DCUSTOM_OPENCV_HASH=MD5=7a668fbc3ac536812643c6b8c8f96be9
+      - -DCUSTOM_ONNXRUNTIME_URL=./onnxruntime-linux-x64-gpu-1.15.1.tgz
+      - -DCUSTOM_ONNXRUNTIME_HASH=MD5=8d2f5ee9f449bdecb10a45715fe74c53
       - -DUSE_SYSTEM_ONNXRUNTIME=ON
     post-install:
       - install -Dm644 --target-directory=${FLATPAK_DEST}/share/metainfo ${FLATPAK_ID}.metainfo.xml
@@ -58,6 +55,12 @@ modules:
         x-checker-data:
             type: git
             tag-pattern: ^([-\d.]+)$
+      - type: file
+        url: https://github.com/microsoft/onnxruntime/releases/download/v1.15.1/onnxruntime-linux-x64-gpu-1.15.1.tgz
+        sha256: eab891393025edd5818d1aa26a42860e5739fcc49e3ca3f876110ec8736fe7f1
+        x-checker-data:
+          type: git
+          tag-pattern: ^v([\d.]+)$
       - type: file
         path: com.obsproject.Studio.Plugin.BackgroundRemoval.metainfo.xml
 
