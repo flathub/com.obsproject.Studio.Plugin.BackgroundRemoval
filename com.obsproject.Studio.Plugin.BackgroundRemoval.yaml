@@ -29,18 +29,6 @@ modules:
       - mkdir -p ${FLATPAK_DEST}/include ${FLATPAK_DEST}/lib
       - mv include/* ${FLATPAK_DEST}/include
       - mv lib/* ${FLATPAK_DEST}/lib
-  # https://docs.opencv.org/4.x/db/d05/tutorial_config_reference.html
-  - name: opencv
-    buildsystem: simple
-    sources:
-      - type: file
-        url: https://github.com/umireon/obs-backgroundremoval-dep-opencv/releases/download/4.8.0-1/opencv-linux-Release.tar.gz
-        sha256: 59a0ad25501d543a7b3a060b018879b5a401076c3a87217414f5ddf24a08fcf1
-        x-checker-data:
-            type: git
-            tag-pattern: ^([-\d.]+)$
-    build-commands:
-      - pwd
   - name: obs-backgroundremoval
     buildsystem: cmake-ninja
     config-opts:
@@ -63,6 +51,12 @@ modules:
         x-checker-data:
             type: git
             tag-pattern: ^v?([\d.]+)$
+      - type: file
+        url: https://github.com/umireon/obs-backgroundremoval-dep-opencv/releases/download/4.8.0-1/opencv-linux-Release.tar.gz
+        sha256: 59a0ad25501d543a7b3a060b018879b5a401076c3a87217414f5ddf24a08fcf1
+        x-checker-data:
+            type: git
+            tag-pattern: ^([-\d.]+)$
       - type: file
         path: com.obsproject.Studio.Plugin.BackgroundRemoval.metainfo.xml
 
