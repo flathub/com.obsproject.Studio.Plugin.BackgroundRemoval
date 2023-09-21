@@ -16,8 +16,13 @@ cleanup:
 modules:
   - name: obs-backgroundremoval
     buildsystem: cmake-ninja
+    builddir: true
     config-opts:
-      - --preset=linux-ci-x86_64
+      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
+      - -DCMAKE_POSITION_INDEPENDENT_CODE=ON
+      - -DENABLE_FRONTEND_API=ON
+      - -DENABLE_QT=ON
+      - -DCMAKE_COMPILE_WARNING_AS_ERROR=ON
       - -DCUSTOM_OPENCV_URL=${FLATPAK_BUILDER_BUILDDIR}/opencv-linux-Release.tar.gz
       - -DCUSTOM_OPENCV_HASH=MD5=7a668fbc3ac536812643c6b8c8f96be9
       - -DCUSTOM_ONNXRUNTIME_URL=${FLATPAK_BUILDER_BUILDDIR}/onnxruntime-linux-x64-gpu-1.15.1.tgz
