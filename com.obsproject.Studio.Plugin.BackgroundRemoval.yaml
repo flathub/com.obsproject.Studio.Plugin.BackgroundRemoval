@@ -37,7 +37,6 @@ modules:
       - -DCUSTOM_OPENCV_HASH=MD5=7a668fbc3ac536812643c6b8c8f96be9
       - -DCUSTOM_ONNXRUNTIME_URL=./onnxruntime-linux-x64-gpu-1.15.1.tgz
       - -DCUSTOM_ONNXRUNTIME_HASH=MD5=8d2f5ee9f449bdecb10a45715fe74c53
-      - -DUSE_SYSTEM_ONNXRUNTIME=ON
     post-install:
       - install -Dm644 --target-directory=${FLATPAK_DEST}/share/metainfo ${FLATPAK_ID}.metainfo.xml
       - appstream-compose --basename=${FLATPAK_ID} --prefix=${FLATPAK_DEST} --origin=flatpak
