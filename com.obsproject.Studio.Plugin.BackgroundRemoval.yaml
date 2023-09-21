@@ -14,21 +14,6 @@ cleanup:
   - /lib/cmake
   - /bin
 modules:
-  # onnxruntime has a bash+python+cmake build script - just download/use pre-compiled library
-  # https://onnxruntime.ai/docs/build/inferencing.html
-  - name: onnxruntime
-    buildsystem: simple
-    sources:
-      - type: archive
-        url: https://github.com/microsoft/onnxruntime/releases/download/v1.15.1/onnxruntime-linux-x64-gpu-1.15.1.tgz
-        sha256: eab891393025edd5818d1aa26a42860e5739fcc49e3ca3f876110ec8736fe7f1
-        x-checker-data:
-            type: git
-            tag-pattern: ^v([\d.]+)$
-    build-commands:
-      - mkdir -p ${FLATPAK_DEST}/include ${FLATPAK_DEST}/lib
-      - mv include/* ${FLATPAK_DEST}/include
-      - mv lib/* ${FLATPAK_DEST}/lib
   - name: obs-backgroundremoval
     buildsystem: cmake-ninja
     config-opts:
