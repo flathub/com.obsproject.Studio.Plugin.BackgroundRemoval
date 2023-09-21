@@ -39,6 +39,8 @@ modules:
         x-checker-data:
             type: git
             tag-pattern: ^([-\d.]+)$
+    build-commands:
+      - pwd
   - name: obs-backgroundremoval
     buildsystem: cmake-ninja
     config-opts:
