@@ -14,51 +14,42 @@ cleanup:
   - /lib/cmake
   - /bin
 modules:
-  # onnxruntime has a bash+python+cmake build script - just download/use pre-compiled library
-  # https://onnxruntime.ai/docs/build/inferencing.html
-  - name: onnxruntime
-    buildsystem: simple
-    sources:
-      - type: archive
-        url: https://github.com/microsoft/onnxruntime/releases/download/v1.14.1/onnxruntime-linux-x64-gpu-1.14.1.tgz
-        sha256: 3dbebaef94948be164b59f0274804443fa56cd902671b08b2144e73c43639a66
-        x-checker-data:
-            type: git
-            tag-pattern: ^v([\d.]+)$
-    build-commands:
-      - mkdir -p ${FLATPAK_DEST}/include ${FLATPAK_DEST}/lib
-      - mv include/* ${FLATPAK_DEST}/include
-      - mv lib/* ${FLATPAK_DEST}/lib
-  # https://docs.opencv.org/4.x/db/d05/tutorial_config_reference.html
-  - name: opencv
+  - name: obs-backgroundremoval
     buildsystem: cmake-ninja
     builddir: true
     config-opts:
-      - "-DBUILD_LIST=core,imgproc"
-    sources:
-      - type: archive
-        url: https://github.com/opencv/opencv/archive/refs/tags/4.7.0.tar.gz
-        sha256: 8df0079cdbe179748a18d44731af62a245a45ebf5085223dc03133954c662973
-        x-checker-data:
-            type: git
-            tag-pattern: ^([\d.]+)$
-  - name: obs-backgroundremoval
-    buildsystem: cmake-ninja
-    config-opts:
-      - -DUSE_SYSTEM_OPENCV=ON
-      - -DUSE_SYSTEM_ONNXRUNTIME=ON
-      - -DLINUX_PORTABLE=OFF
+      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
+      - -DCMAKE_POSITION_INDEPENDENT_CODE=ON
+      - -DENABLE_FRONTEND_API=ON
+      - -DENABLE_QT=ON
+      - -DCMAKE_COMPILE_WARNING_AS_ERROR=ON
+      - -DCUSTOM_OPENCV_URL=/run/build/obs-backgroundremoval/opencv-linux-Release.tar.gz
+      - -DCUSTOM_OPENCV_HASH=MD5=7a668fbc3ac536812643c6b8c8f96be9
+      - -DCUSTOM_ONNXRUNTIME_URL=/run/build/obs-backgroundremoval/onnxruntime-linux-x64-gpu-1.15.1.tgz
+      - -DCUSTOM_ONNXRUNTIME_MD5=8d2f5ee9f449bdecb10a45715fe74c53
     post-install:
-      - install -Dm644 --target-directory=${FLATPAK_DEST}/share/metainfo ${FLATPAK_ID}.metainfo.xml
+      - install -Dm644 --target-directory=${FLATPAK_DEST}/share/metainfo /run/build/obs-backgroundremoval/${FLATPAK_ID}.metainfo.xml
       - appstream-compose --basename=${FLATPAK_ID} --prefix=${FLATPAK_DEST} --origin=flatpak
         ${FLATPAK_ID}
     sources:
       - type: archive
-        url: https://github.com/royshil/obs-backgroundremoval/archive/refs/tags/v1.0.1.tar.gz
-        sha256: 92385cff5a58644496306e66b15189a333e980a8b22958959566a10fc494d72f
+        url: https://github.com/royshil/obs-backgroundremoval/archive/refs/tags/1.1.6.tar.gz
+        sha256: 9c6c0e37c0b938d1ab7112c073ab97d61fa393a79d3bd4d77fb8b61387fa2fbe
         x-checker-data:
             type: git
-            tag-pattern: ^v([\d.]+)$
+            tag-pattern: ^v?([\d.]+)$
+      - type: file
+        url: https://github.com/umireon/obs-backgroundremoval-dep-opencv/releases/download/4.8.0-1/opencv-linux-Release.tar.gz
+        sha256: 59a0ad25501d543a7b3a060b018879b5a401076c3a87217414f5ddf24a08fcf1
+        x-checker-data:
+            type: git
+            tag-pattern: ^([-\d.]+)$
+      - type: file
+        url: https://github.com/microsoft/onnxruntime/releases/download/v1.15.1/onnxruntime-linux-x64-gpu-1.15.1.tgz
+        sha256: eab891393025edd5818d1aa26a42860e5739fcc49e3ca3f876110ec8736fe7f1
+        x-checker-data:
+          type: git
+          tag-pattern: ^v([\d.]+)$
       - type: file
         path: com.obsproject.Studio.Plugin.BackgroundRemoval.metainfo.xml
 
