@@ -39,7 +39,7 @@ modules:
             type: git
             tag-pattern: ^([\d.]+)$
       - type: file
-        url: https://github.com/umireon/obs-backgroundremoval-dep-opencv/releases/download/4.8.0-2/opencv-linux-Release.tar.gz
+        url: https://github.com/occ-ai/obs-backgroundremoval-dep-opencv/releases/download/4.8.0-2/opencv-linux-Release.tar.gz
         sha256: 62ff0b15c7be65f137102aed5b7b25aba6a4e14b1d49791a17a6c32e21d64cd9
         x-checker-data:
             type: git
