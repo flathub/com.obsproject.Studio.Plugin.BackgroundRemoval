@@ -46,7 +46,7 @@ modules:
             tag-pattern: ^([-\d.]+)$
       - type: file
         url: https://github.com/microsoft/onnxruntime/releases/download/v1.16.3/onnxruntime-linux-x64-gpu-1.16.3.tgz
-        sha256: d26b8a7eed1df4440aa3d8eac5049980cbe585514ccedfda809712051a4b1721
+        sha256: bbdc33367c056029b3ac0c042cbca2236b8f59a3a53b4daf23432ef1d8bf52de
         x-checker-data:
           type: git
           tag-pattern: ^v([\d.]+)$
