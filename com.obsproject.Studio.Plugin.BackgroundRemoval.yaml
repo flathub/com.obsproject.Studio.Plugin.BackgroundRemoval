@@ -25,8 +25,8 @@ modules:
       - -DCMAKE_COMPILE_WARNING_AS_ERROR=ON
       - -DCUSTOM_OPENCV_URL=/run/build/obs-backgroundremoval/opencv-linux-Release.tar.gz
       - -DCUSTOM_OPENCV_HASH=MD5=203f9c6214b00a3383f9764afcac9ee9
-      - -DCUSTOM_ONNXRUNTIME_URL=/run/build/obs-backgroundremoval/onnxruntime-linux-x64-gpu-1.16.3.tgz
-      - -DCUSTOM_ONNXRUNTIME_MD5=597eb06a0d7a66ef0c29e38bde118364
+      - -DCUSTOM_ONNXRUNTIME_URL=/run/build/obs-backgroundremoval/onnxruntime-linux-x64-gpu-1.16.0.tgz
+      - -DCUSTOM_ONNXRUNTIME_MD5=21b3eb42e0bee9e7b51cbf508352f188
     post-install:
       - install -Dm644 --target-directory=${FLATPAK_DEST}/share/metainfo /run/build/obs-backgroundremoval/${FLATPAK_ID}.metainfo.xml
       - appstream-compose --basename=${FLATPAK_ID} --prefix=${FLATPAK_DEST} --origin=flatpak
@@ -45,8 +45,8 @@ modules:
             type: git
             tag-pattern: ^([-\d.]+)$
       - type: file
-        url: https://github.com/microsoft/onnxruntime/releases/download/v1.16.3/onnxruntime-linux-x64-gpu-1.16.3.tgz
-        sha256: bbdc33367c056029b3ac0c042cbca2236b8f59a3a53b4daf23432ef1d8bf52de
+        url: https://github.com/microsoft/onnxruntime/releases/download/v1.16.0/onnxruntime-linux-x64-gpu-1.16.0.tgz
+        sha256: 9afb2a26cb45b7733c005118b6015e6f4256233041201efc6aa1116dde26a656
         x-checker-data:
           type: git
           tag-pattern: ^v([\d.]+)$
