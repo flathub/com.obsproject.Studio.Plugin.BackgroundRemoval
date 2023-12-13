@@ -24,29 +24,29 @@ modules:
       - -DENABLE_QT=ON
       - -DCMAKE_COMPILE_WARNING_AS_ERROR=ON
       - -DCUSTOM_OPENCV_URL=/run/build/obs-backgroundremoval/opencv-linux-Release.tar.gz
-      - -DCUSTOM_OPENCV_HASH=MD5=7a668fbc3ac536812643c6b8c8f96be9
-      - -DCUSTOM_ONNXRUNTIME_URL=/run/build/obs-backgroundremoval/onnxruntime-linux-x64-gpu-1.15.1.tgz
-      - -DCUSTOM_ONNXRUNTIME_MD5=8d2f5ee9f449bdecb10a45715fe74c53
+      - -DCUSTOM_OPENCV_HASH=MD5=203f9c6214b00a3383f9764afcac9ee9
+      - -DCUSTOM_ONNXRUNTIME_URL=/run/build/obs-backgroundremoval/onnxruntime-linux-x64-gpu-1.16.0.tgz
+      - -DCUSTOM_ONNXRUNTIME_MD5=21b3eb42e0bee9e7b51cbf508352f188
     post-install:
       - install -Dm644 --target-directory=${FLATPAK_DEST}/share/metainfo /run/build/obs-backgroundremoval/${FLATPAK_ID}.metainfo.xml
       - appstream-compose --basename=${FLATPAK_ID} --prefix=${FLATPAK_DEST} --origin=flatpak
         ${FLATPAK_ID}
     sources:
       - type: archive
-        url: https://github.com/royshil/obs-backgroundremoval/archive/refs/tags/1.1.6.tar.gz
-        sha256: 9c6c0e37c0b938d1ab7112c073ab97d61fa393a79d3bd4d77fb8b61387fa2fbe
+        url: https://github.com/occ-ai/obs-backgroundremoval/archive/refs/tags/1.1.7.tar.gz
+        sha256: 13339a44ef3ddd8e343f0d22a4fa4c5ee0c8622bea34b8d1f3df1b4656ad6d25
         x-checker-data:
             type: git
-            tag-pattern: ^v?([\d.]+)$
+            tag-pattern: ^([\d.]+)$
       - type: file
-        url: https://github.com/umireon/obs-backgroundremoval-dep-opencv/releases/download/4.8.0-1/opencv-linux-Release.tar.gz
-        sha256: 59a0ad25501d543a7b3a060b018879b5a401076c3a87217414f5ddf24a08fcf1
+        url: https://github.com/occ-ai/obs-backgroundremoval-dep-opencv/releases/download/4.8.0-2/opencv-linux-Release.tar.gz
+        sha256: 62ff0b15c7be65f137102aed5b7b25aba6a4e14b1d49791a17a6c32e21d64cd9
         x-checker-data:
             type: git
             tag-pattern: ^([-\d.]+)$
       - type: file
-        url: https://github.com/microsoft/onnxruntime/releases/download/v1.15.1/onnxruntime-linux-x64-gpu-1.15.1.tgz
-        sha256: eab891393025edd5818d1aa26a42860e5739fcc49e3ca3f876110ec8736fe7f1
+        url: https://github.com/microsoft/onnxruntime/releases/download/v1.16.0/onnxruntime-linux-x64-gpu-1.16.0.tgz
+        sha256: 9afb2a26cb45b7733c005118b6015e6f4256233041201efc6aa1116dde26a656
         x-checker-data:
           type: git
           tag-pattern: ^v([\d.]+)$
