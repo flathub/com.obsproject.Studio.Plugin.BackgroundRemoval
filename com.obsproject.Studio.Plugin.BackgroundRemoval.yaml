@@ -23,24 +23,24 @@ modules:
       - -DENABLE_FRONTEND_API=ON
       - -DENABLE_QT=ON
       - -DCMAKE_COMPILE_WARNING_AS_ERROR=ON
-      - -DCUSTOM_OPENCV_URL=/run/build/obs-backgroundremoval/opencv-linux-Release.tar.gz
-      - -DCUSTOM_OPENCV_HASH=MD5=203f9c6214b00a3383f9764afcac9ee9
+      - -DCUSTOM_OPENCV_URL=/run/build/obs-backgroundremoval/opencv-linux-v4.8.1-1-Release.tar.gz
+      - -DCUSTOM_OPENCV_HASH=SHA256=809922a7cc9f344a2d82a232ed7b02e122c82e77cba94b4047e666a0527cc00e
       - -DCUSTOM_ONNXRUNTIME_URL=/run/build/obs-backgroundremoval/onnxruntime-linux-x64-gpu-1.16.3.tgz
-      - -DCUSTOM_ONNXRUNTIME_MD5=597eb06a0d7a66ef0c29e38bde118364
+      - -DCUSTOM_ONNXRUNTIME_HASH=SHA256=bbdc33367c056029b3ac0c042cbca2236b8f59a3a53b4daf23432ef1d8bf52de
     post-install:
       - install -Dm644 --target-directory=${FLATPAK_DEST}/share/metainfo /run/build/obs-backgroundremoval/${FLATPAK_ID}.metainfo.xml
       - appstream-compose --basename=${FLATPAK_ID} --prefix=${FLATPAK_DEST} --origin=flatpak
         ${FLATPAK_ID}
     sources:
       - type: archive
-        url: https://github.com/occ-ai/obs-backgroundremoval/archive/refs/tags/1.1.8.tar.gz
-        sha256: c84a6f2cb40fe2df0e8f7745ad41b1dbbf21aea3a3b61de20e2d79b9fc412421
+        url: https://github.com/occ-ai/obs-backgroundremoval/archive/refs/tags/1.1.10.tar.gz
+        sha256: 7372ba4d996322bee82de1a934ff83c085a4532ab64537959145be3535f45da3
         x-checker-data:
             type: git
             tag-pattern: ^([\d.]+)$
       - type: file
-        url: https://github.com/occ-ai/obs-backgroundremoval-dep-opencv/releases/download/4.8.0-2/opencv-linux-Release.tar.gz
-        sha256: 62ff0b15c7be65f137102aed5b7b25aba6a4e14b1d49791a17a6c32e21d64cd9
+        url: https://github.com/occ-ai/obs-backgroundremoval-dep-opencv/releases/download/v4.8.1-1/opencv-linux-v4.8.1-1-Release.tar.gz
+        sha256: 809922a7cc9f344a2d82a232ed7b02e122c82e77cba94b4047e666a0527cc00e
         x-checker-data:
             type: git
             tag-pattern: ^([-\d.]+)$

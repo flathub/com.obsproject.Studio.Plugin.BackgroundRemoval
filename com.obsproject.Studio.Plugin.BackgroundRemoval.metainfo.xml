@@ -5,10 +5,12 @@
   <name>Background Removal</name>
   <summary>Remove the background from your camera video</summary>
   <description>Remove the background from your camera video without a green screen. Optimized for person portrait views.</description>
-  <url type="homepage">https://github.com/royshil/obs-backgroundremoval</url>
+  <url type="homepage">https://github.com/occ-ai/obs-backgroundremoval</url>
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>GPL-2.0</project_license>
   <releases>
+    <release version="1.1.10" date="2024-01-09"/>
+    <release version="1.1.9" date="2024-01-04"/>
     <release version="1.1.8" date="2023-12-19"/>
     <release version="1.1.7" date="2023-10-11"/>
   </releases>
