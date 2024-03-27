@@ -2,7 +2,7 @@ id: com.obsproject.Studio.Plugin.BackgroundRemoval
 branch: stable
 runtime: com.obsproject.Studio
 runtime-version: stable
-sdk: org.kde.Sdk//6.5
+sdk: org.kde.Sdk//6.6
 build-extension: true
 separate-locales: false
 appstream-compose: false
@@ -11,9 +11,90 @@ build-options:
 cleanup:
   - /include
   - /share/opencv4
+  - '*.a'
   - /lib/cmake
+  - /lib/opencv4
+  - /lib/pkg-config
   - /bin
 modules:
+  - name: opencv
+    buildsystem: cmake-ninja
+    builddir: true
+    config-opts:
+      - -DCMAKE_BUILD_TYPE=Release
+      - -DOPENCV_FORCE_3RDPARTY_BUILD=ON
+      - -DBUILD_SHARED_LIBS=OFF
+      - -DBUILD_opencv_apps=OFF
+      - -DBUILD_opencv_js=OFF
+      - -DBUILD_ANDROID_PROJECTS=OFF
+      - -DBUILD_ANDROID_EXAMPLES=OFF
+      - -DBUILD_DOCS=OFF
+      - -DBUILD_EXAMPLES=OFF
+      - -DBUILD_PACKAGE=OFF
+      - -DBUILD_PERF_TESTS=OFF
+      - -DBUILD_TESTS=OFF
+      - -DBUILD_WITH_DEBUG_INFO=OFF
+      - -DBUILD_WITH_STATIC_CRT=OFF
+      - -DBUILD_WITH_DYNAMIC_IPP=OFF
+      - -DBUILD_FAT_JAVA_LIB=OFF
+      - -DBUILD_ANDROID_SERVICE=OFF
+      - -DBUILD_CUDA_STUBS=OFF
+      - -DBUILD_JAVA=OFF
+      - -DBUILD_OBJC=OFF
+      - -DBUILD_opencv_python3=OFF
+      - -DINSTALL_CREATE_DISTRIB=OFF
+      - -DINSTALL_BIN_EXAMPLES=OFF
+      - -DINSTALL_C_EXAMPLES=OFF
+      - -DINSTALL_PYTHON_EXAMPLES=OFF
+      - -DINSTALL_ANDROID_EXAMPLES=OFF
+      - -DINSTALL_TO_MANGLED_PATHS=OFF
+      - -DINSTALL_TESTS=OFF
+      - -DBUILD_opencv_calib3d=OFF
+      - -DBUILD_opencv_core=ON
+      - -DBUILD_opencv_dnn=OFF
+      - -DBUILD_opencv_features2d=ON
+      - -DBUILD_opencv_flann=OFF
+      - -DBUILD_opencv_gapi=OFF
+      - -DBUILD_opencv_highgui=OFF
+      - -DBUILD_opencv_imgcodecs=OFF
+      - -DBUILD_opencv_imgproc=ON
+      - -DBUILD_opencv_ml=OFF
+      - -DBUILD_opencv_objdetect=OFF
+      - -DBUILD_opencv_photo=ON
+      - -DBUILD_opencv_stitching=OFF
+      - -DBUILD_opencv_video=OFF
+      - -DBUILD_opencv_videoio=OFF
+      - -DWITH_PNG=OFF
+      - -DWITH_JPEG=OFF
+      - -DWITH_TIFF=OFF
+      - -DWITH_WEBP=OFF
+      - -DWITH_OPENJPEG=OFF
+      - -DWITH_JASPER=OFF
+      - -DWITH_OPENEXR=OFF
+      - -DWITH_FFMPEG=OFF
+      - -DWITH_GSTREAMER=OFF
+      - -DWITH_1394=OFF
+      - -DWITH_PROTOBUF=OFF
+      - -DBUILD_PROTOBUF=OFF
+      - -DWITH_CAROTENE=OFF
+      - -DWITH_EIGEN=OFF
+      - -DWITH_OPENVX=OFF
+      - -DWITH_CLP=OFF
+      - -DWITH_DIRECTX=OFF
+      - -DWITH_VA=OFF
+      - -DWITH_LAPACK=OFF
+      - -DWITH_QUIRC=OFF
+      - -DWITH_ADE=OFF
+      - -DWITH_ITT=OFF
+      - -DWITH_OPENCL=OFF
+      - -DWITH_IPP=OFF
+    sources:
+      - type: archive
+        url: https://github.com/opencv/opencv/archive/refs/tags/4.8.1.tar.gz
+        sha256: 62f650467a60a38794d681ae7e66e3e8cfba38f445e0bf87867e2f2cdc8be9d5
+        x-checker-data:
+            type: git
+            tag-pattern: ^([\d.]+)$
   - name: obs-backgroundremoval
     buildsystem: cmake-ninja
     builddir: true
@@ -21,32 +102,25 @@ modules:
       - -DCMAKE_BUILD_TYPE=RelWithDebInfo
       - -DCMAKE_POSITION_INDEPENDENT_CODE=ON
       - -DENABLE_FRONTEND_API=ON
-      - -DENABLE_QT=ON
+      - -DENABLE_QT=OFF
       - -DCMAKE_COMPILE_WARNING_AS_ERROR=ON
-      - -DCUSTOM_OPENCV_URL=/run/build/obs-backgroundremoval/opencv-linux-v4.8.1-1-Release.tar.gz
-      - -DCUSTOM_OPENCV_HASH=SHA256=809922a7cc9f344a2d82a232ed7b02e122c82e77cba94b4047e666a0527cc00e
-      - -DCUSTOM_ONNXRUNTIME_URL=/run/build/obs-backgroundremoval/onnxruntime-linux-x64-gpu-1.16.3.tgz
-      - -DCUSTOM_ONNXRUNTIME_HASH=SHA256=bbdc33367c056029b3ac0c042cbca2236b8f59a3a53b4daf23432ef1d8bf52de
+      - -DUSE_SYSTEM_OPENCV=ON
+      - -DCUSTOM_ONNXRUNTIME_URL=/run/build/obs-backgroundremoval/onnxruntime-linux-x64-gpu-1.17.1.tgz
+      - -DCUSTOM_ONNXRUNTIME_HASH=SHA256=613c53745ea4960ed368f6b3ab673558bb8561c84a8fa781b4ea7fb4a4340be4
     post-install:
       - install -Dm644 --target-directory=${FLATPAK_DEST}/share/metainfo /run/build/obs-backgroundremoval/${FLATPAK_ID}.metainfo.xml
       - appstream-compose --basename=${FLATPAK_ID} --prefix=${FLATPAK_DEST} --origin=flatpak
         ${FLATPAK_ID}
     sources:
       - type: archive
-        url: https://github.com/occ-ai/obs-backgroundremoval/archive/refs/tags/1.1.10.tar.gz
-        sha256: 7372ba4d996322bee82de1a934ff83c085a4532ab64537959145be3535f45da3
+        url: https://github.com/occ-ai/obs-backgroundremoval/archive/refs/tags/1.1.13.tar.gz
+        sha256: 732d280dbc094ecb62783c4d51ebf956ea365a0b4f76c13621628bc7fcb9415b
         x-checker-data:
-            type: git
-            tag-pattern: ^([\d.]+)$
+          type: git
+          tag-pattern: ^([\d.]+)$
       - type: file
-        url: https://github.com/occ-ai/obs-backgroundremoval-dep-opencv/releases/download/v4.8.1-1/opencv-linux-v4.8.1-1-Release.tar.gz
-        sha256: 809922a7cc9f344a2d82a232ed7b02e122c82e77cba94b4047e666a0527cc00e
-        x-checker-data:
-            type: git
-            tag-pattern: ^([-\d.]+)$
-      - type: file
-        url: https://github.com/microsoft/onnxruntime/releases/download/v1.16.3/onnxruntime-linux-x64-gpu-1.16.3.tgz
-        sha256: bbdc33367c056029b3ac0c042cbca2236b8f59a3a53b4daf23432ef1d8bf52de
+        url: https://github.com/microsoft/onnxruntime/releases/download/v1.17.1/onnxruntime-linux-x64-gpu-1.17.1.tgz
+        sha256: 613c53745ea4960ed368f6b3ab673558bb8561c84a8fa781b4ea7fb4a4340be4
         x-checker-data:
           type: git
           tag-pattern: ^v([\d.]+)$
