@@ -4,11 +4,20 @@
   <extends>com.obsproject.Studio</extends>
   <name>Background Removal</name>
   <summary>Remove the background from your camera video</summary>
-  <description>Remove the background from your camera video without a green screen. Optimized for person portrait views.</description>
+  <description>
+    <p>
+      Remove the background from your camera video without a green screen. Optimized for person portrait views.
+    </p>
+  </description>
   <url type="homepage">https://github.com/occ-ai/obs-backgroundremoval</url>
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>GPL-2.0</project_license>
   <releases>
+    <release version="1.3.3" date="2025-11-11">
+      <description>
+        <p>Added a mask expansion slider to adjust the safe area around detected persons.</p>
+      </description>
+    </release>
     <release version="1.1.13" date="2024-03-21"/>
     <release version="1.1.12" date="2024-01-14"/>
     <release version="1.1.11" date="2024-01-14"/>
