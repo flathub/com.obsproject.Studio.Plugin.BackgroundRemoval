@@ -105,7 +105,7 @@ modules:
         commit: 0078e370fdc197c17d3cd19b0e88a0bf3e5ba2ad
         x-checker-data:
           type: git
-          tag-pattern: ^([\\d.]+)$
+          tag-pattern: ^v?([\d.]+)$
       - type: file
         path: com.obsproject.Studio.Plugin.BackgroundRemoval.metainfo.xml
     post-install:
